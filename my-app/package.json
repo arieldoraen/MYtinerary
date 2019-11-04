@@ -1,0 +1,19 @@
+{
+  "name": "primer-paquete-node",
+  "version": "1.0.0",
+  "description": "prueba-node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arieldoraen/MYtinerary.git"
+  },
+  "author": "Ariel Dos Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arieldoraen/MYtinerary/issues"
+  },
+  "homepage": "https://github.com/arieldoraen/MYtinerary#readme"
+}
