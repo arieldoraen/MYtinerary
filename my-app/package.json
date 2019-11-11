@@ -1,35 +1,32 @@
 {
-  "name": "primer-paquete-node",
-  "version": "1.0.0",
-  "description": "prueba-node",
-  "main": "index.js",
-  "scripts": {
-    "client": "cd client && npm start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arieldoraen/MYtinerary.git"
-  },
-  "author": "Ariel Dos Santos",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/arieldoraen/MYtinerary/issues"
-  },
-  "homepage": "https://github.com/arieldoraen/MYtinerary#readme",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "concurrently": "^5.0.0",
-    "cors": "^2.8.5",
-<<<<<<< HEAD
-    "dotenv": "^8.2.0",
-=======
->>>>>>> 296468e522b2d80bdc3007e56df66ffa1f7e8dce
-    "express": "^4.17.1",
-    "mongoose": "^5.7.7"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.4"
-  }
+    "name": "primer-paquete-node",
+    "version": "1.0.0",
+    "description": "prueba-node",
+    "main": "index.js",
+    "scripts": {
+        "client": "cd client && npm start",
+        "server": "nodemon server.js",
+        "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/arieldoraen/MYtinerary.git"
+    },
+    "author": "Ariel Dos Santos",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/arieldoraen/MYtinerary/issues"
+    },
+    "homepage": "https://github.com/arieldoraen/MYtinerary#readme",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "concurrently": "^5.0.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "mongoose": "^5.7.7"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.4"
+    }
 }

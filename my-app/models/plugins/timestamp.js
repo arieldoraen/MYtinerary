@@ -3,9 +3,8 @@ const City = require('../models/citiesModel')
 const cityController = {
     listCities: (req, res) => {
         var Cities = City.find()
-        res.json({ "response": Cities })
     },
-    loadCity: async(req, res) => {
+    loadCity: (req, res) => {
         var name = req.body.name
         var country = req.body.country
 
