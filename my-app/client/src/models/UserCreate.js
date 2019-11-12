@@ -1,15 +1,11 @@
 import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import '../App.css';
 
 
 function UserCreate() {
   return (
-    <div className="App content" >
-      <Header />
+    <div className="content" >
       Create Account
-      <Footer />
     </div>
   );
 }

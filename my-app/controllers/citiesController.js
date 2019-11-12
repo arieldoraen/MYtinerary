@@ -22,14 +22,14 @@ const cityController = {
     },
     deleteCity: (req, res) => {
         City.findOneAndRemove({
-                id: req.body.id
+                _id: req.params.id
             })
             .then(res => res.json({ 'response': 'OK' }))
             .catch(err => res.json({ 'response': err }))
     },
     updateCity: (req, res) => {
         City.findOneAndUpdate({
-                id: req.body.id
+                id: req.params.id
             }, {
                 name: req.body.newName || req.body.name,
                 country: req.body.newCountry || req.body.country,

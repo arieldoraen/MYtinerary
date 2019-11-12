@@ -1,11 +1,12 @@
 import React from 'react';
 import '../App.css';
+import { Link } from 'react-router-dom'
 
 class UserInfo extends React.Component {
     render() {
         return <div className="row">
-            <a className="col-5" href="/Login" >Log in</a><div className="col-2" />
-            <a className="col-5" href="/CreateAccount" >Create Account</a>
+            <Link className="col-5" to="/Login" >Log in</Link><div className="col-2" />
+            <Link className="col-5" to="/CreateAccount" >Create Account</Link>
         </div>
 
 

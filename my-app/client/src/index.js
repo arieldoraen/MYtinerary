@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Link, BrowserRouter } from 'react-router-dom';
 import './index.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import App from './models/App';
 import Cities from "./models/Cities";
 import UserCreate from './models/UserCreate';
@@ -11,15 +13,21 @@ import * as serviceWorker from './serviceWorker';
 
 
 const routing = (
-  <Router>
-    <div>
-      <Route path="/" component={App} />
-      <Route path="/MYtinerary" component={MYtinerary} />
-      <Route path="/CreateAccount" component={UserCreate} />
-      <Route path="/Login" component={UserLog} />
-      <Route path="/cities" component={Cities} />
-    </div>
-  </Router>
+  <div className="App">
+    <div className='headerClass'><Header/></div>
+      <BrowserRouter>
+      <div>
+        <Route exact path="/home" component={App} />
+        <Route path="/MYtinerary" component={MYtinerary} />
+        <Route path="/CreateAccount" component={UserCreate} />
+        <Route path="/Login" component={UserLog} />
+        <Route path="/cities" component={Cities} />
+      </div>
+      <div className='footerClass'><Footer/></div>
+    </BrowserRouter>
+    
+  </div>
+  
 )
 
 ReactDOM.render(routing, document.getElementById('root'))
