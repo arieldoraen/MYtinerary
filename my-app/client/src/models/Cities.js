@@ -18,7 +18,8 @@ class CityList extends React.Component {
 
   async componentDidMount(){
     const res =  await axios.get('http://localhost:5000/api/cities');
-    this.setState({citiesList:res.data.cities});
+    console.log(res);
+    this.setState({citiesList:res.data.response});
     console.log(this.state.citiesList.cities);
   }
   render() {

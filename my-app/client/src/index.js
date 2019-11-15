@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter } from 'react-router-dom';
+import { Route, Link, BrowserRouter, Redirect } from 'react-router-dom';
 import './index.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -18,10 +18,11 @@ const routing = (
       <BrowserRouter>
       <div>
         <Route exact path="/home" component={App} />
-        <Route path="/MYtinerary" component={MYtinerary} />
+        <Route path="/MYtinerary" component={Cities} />
         <Route path="/CreateAccount" component={UserCreate} />
         <Route path="/Login" component={UserLog} />
         <Route path="/cities" component={Cities} />
+        <Redirect from="/" exact to="/home" />
       </div>
       <div className='footerClass'><Footer/></div>
     </BrowserRouter>
