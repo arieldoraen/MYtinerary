@@ -1,44 +1,49 @@
 import React from 'react';
 import '../App.css';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-
-function Cities() {
-  return (
-    <div className="content" >
-      <CityList />
-    </div>
-  );
-}
-
-class CityList extends React.Component {
-  state ={
-    citiesList: []
+class Cities extends React.Component {
+  constructor(props){
+    super(props)
   }
 
   async componentDidMount(){
-    const res =  await axios.get('http://localhost:5000/api/cities');
-    console.log(res);
-    this.setState({citiesList:res.data.response});
-    console.log(this.state.citiesList.cities);
+    await axios.get('http://localhost:5000/api/cities')
+    .then(res => this.props.listCities(res.data.response));
+    console.log(this.props.cities);
+    //this.setState({citiesList:res.data.response});
+    //console.log(this.state.citiesList.cities);
   }
   render() {
-    return <div className="row">
-      <div className="col-md-4">
-          Ciudades
-      </div>
-      <div className="col-md-8">
-          <ul>
-            {
-              this.state.citiesList.map(cities => <li key={cities._id}>
-                {cities.name} {cities.country}
-              </li>)
-            }
-          </ul>
+    return <div className="content" >
+      <div className="row">
+        <div className="col-md-4">
+            Ciudades
+        </div>
+        <div className="col-md-8">
+            <ul>
+              {
+                this.props.cities.map(city => <li key={city._id}>
+                  {city.name} {city.country}
+                </li>)
+              }
+            </ul>
+        </div>
       </div>
     </div>
-
-
   }
 }
-export default Cities;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    listCities: (dataCities) => {
+      dispatch({type: 'list_cities', payload: dataCities})
+    }
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);

@@ -10,25 +10,29 @@ import UserCreate from './models/UserCreate';
 import UserLog from './models/UserLog';
 import MYtinerary from './models/MYtinerary';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './reducers';
 
+const store = createStore(reducer)
 
 const routing = (
-  <div className="App">
-    <div className='headerClass'><Header/></div>
-      <BrowserRouter>
-      <div>
-        <Route exact path="/home" component={App} />
-        <Route path="/MYtinerary" component={Cities} />
-        <Route path="/CreateAccount" component={UserCreate} />
-        <Route path="/Login" component={UserLog} />
-        <Route path="/cities" component={Cities} />
-        <Redirect from="/" exact to="/home" />
-      </div>
-      <div className='footerClass'><Footer/></div>
-    </BrowserRouter>
-    
-  </div>
-  
+  <Provider store={store}>
+    <div className="App">
+      <div className='headerClass'><Header/></div>
+        <BrowserRouter>
+        <div>
+          <Route exact path="/home" component={App} />
+          <Route path="/MYtinerary" component={Cities} />
+          <Route path="/CreateAccount" component={UserCreate} />
+          <Route path="/Login" component={UserLog} />
+          <Route path="/cities" component={Cities} />
+          <Redirect from="/" exact to="/home" />
+        </div>
+        <div className='footerClass'><Footer/></div>
+      </BrowserRouter>
+    </div>
+  </Provider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'))
