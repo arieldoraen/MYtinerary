@@ -27,8 +27,28 @@ const mytineraryController = {
     await newMytinerary.save().catch(err => res.json({ response: err }));
     res.json({ response: "OK" });
   },
-  deleteMYtinerary: async (req, res) => {},
-  updateMYtinerary: async (req, res) => {}
+  deleteMYtinerary: async (req, res) => {
+    Mytinerary.findOneAndDelete({
+      _id: req.params.id
+    })
+      .then(res => res.json({ 'response': 'OK' }))
+      .catch(err => res.json({ 'response': err }))
+  },
+  updateMYtinerary: async (req, res) => {
+    Mytinerary.findOneAndUpdate({
+      _id: req.params.id
+    }, {
+      title: req.body.title,
+      city_id: req.body.city_id,
+      duration: req.body.duration,
+      price: req.body.price,
+      hashtag: req.body.hashtag
+    }, {
+      new: true
+    })
+      .then(res => res.json({ 'response': 'OK' }))
+      .catch(err => res.json({ 'response': err }))
+  }
 };
 
 module.exports = mytineraryController;

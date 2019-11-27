@@ -15,24 +15,20 @@ class Cities extends React.Component {
         console.log(this.props.cities);
     }
     render() {
-        return ( <
-            div className = "content" >
-            <
-            div className = "row" >
-            <
-            div className = "col-md-4" > Ciudades < /div> <
-            div className = "col-md-8" >
-            <
-            ul > {
-                this.props.cities.map(city => ( <
-                    li key = { city._id } > { city.name } { city.country } <
-                    /li>
-                ))
-            } <
-            /ul> <
-            /div> <
-            /div> <
-            /div>
+        return (
+            <div className="content" >
+                <div className="row" >
+                    <div className="col-md-4" > Ciudades </div>
+                    <div className="col-md-8" >
+                        <ul > {
+                            this.props.cities.map(city => (
+                                <li key={city._id} > {city.name} {city.country}
+                                </li>
+                            ))
+                        } </ul>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

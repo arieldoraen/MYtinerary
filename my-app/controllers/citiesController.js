@@ -2,14 +2,14 @@ const City = require('../models/citiesModel')
 
 const cityController = {
     listCities: async (req, res) => {
-        const data  = await City.find()
-        .catch(err => res.json({ 'response': err }))
+        const data = await City.find()
+            .catch(err => res.json({ 'response': err }))
         res.json({ 'response': data })
     },
-    loadCity: async(req, res) => {
+    loadCity: async (req, res) => {
         var name = req.body.name
         var country = req.body.country
-        var image  = req.body.image || ' '
+        var image = req.body.image || ' '
 
         const newCity = new City({
             name: name,
@@ -22,21 +22,21 @@ const cityController = {
     },
     deleteCity: (req, res) => {
         City.findOneAndRemove({
-                _id: req.params.id
-            })
+            _id: req.params.id
+        })
             .then(res => res.json({ 'response': 'OK' }))
             .catch(err => res.json({ 'response': err }))
     },
     updateCity: (req, res) => {
         City.findOneAndUpdate({
-                id: req.params.id
-            }, {
-                name: req.body.newName || req.body.name,
-                country: req.body.newCountry || req.body.country,
-                image: req.body.newImage || req.body.image || ' '
-            }, {
-                new: true
-            })
+            _id: req.params.id
+        }, {
+            name: req.body.newName || req.body.name,
+            country: req.body.newCountry || req.body.country,
+            image: req.body.newImage || req.body.image || ' '
+        }, {
+            new: true
+        })
             .then(res => res.json({ 'response': 'OK' }))
             .catch(err => res.json({ 'response': err }))
     }
