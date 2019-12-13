@@ -27,8 +27,7 @@ const userController = {
     const newUser = new User({
       name: name,
       email: email,
-      //password: newUser.generateHash(password),
-      password: password,
+      password: newUser.generateHash(password),
       profile_picture: profile_picture
     });
     newUser.save((err, user) => {
@@ -54,14 +53,14 @@ const userController = {
           message: 'Error: Sv Error'+ err
         });
       } else if(UserData.length != 1) {
-        return res.send({
+        return res.send({ 
           success: false,
           message: 'Error: Algo malio sal'
         });  
       }
     })
     const user = UserData[0];
-    if (user.password != req.body.password){
+    if (user.validPassword(req.body.password)){
       return res.send({
         success: false,
         message: 'Error: Pass incorrecta'
@@ -84,7 +83,10 @@ const userController = {
     });
   },
   deleteUser: async (req, res) => {},
-  updateUser: async (req, res) => {}
+  updateUser: async (req, res) => {},
+  verify: async (req,res) => {
+
+  }
 };
 
 module.exports = userController;
