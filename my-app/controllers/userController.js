@@ -1,5 +1,6 @@
 const User = require("../models/usersModel");
-const UserSession = require("../models/UserSession");
+const jwt = require('jsonwebtoken');
+process.env.SECRET_KEY ='secret';
 
 const userController = {
   register: async (req, res) => {
@@ -44,7 +45,7 @@ const userController = {
     });
   },
   login: async (req, res) => {
-    User.find({
+    User.findOne({
       email: req.body.email
     }, (err, UserData) => {
       if (err) {
@@ -53,7 +54,7 @@ const userController = {
           message: 'Error: Sv Error'+ err
         });
       } else if(UserData.length != 1) {
-        return res.send({ 
+        return res.send({
           success: false,
           message: 'Error: Algo malio sal'
         });  
@@ -66,26 +67,45 @@ const userController = {
         message: 'Error: Pass incorrecta'
       });
     }
-    new userSession = new UserSession();
-    userSession.userId = user._id;
-    userSession.save((err, data) => {
-      if(err) {
-        return res.send({
-          success: false,
-          message: 'Error: Sv error'+err
-        });
-      }
+    const payload = {
+      _id: user._id,
+      name: user.name,
+      email: user.email
+    }
+    let token = jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: 1440
+      })
       return res.send({
         success: true,
         message: 'Logeado',
-        token: document._id
+        token: token
       });
-    });
   },
   deleteUser: async (req, res) => {},
   updateUser: async (req, res) => {},
-  verify: async (req,res) => {
-
+  verifyLogin: async (req, res) => {
+    var decoded = jwt.verify(req.headers["authorization"],process.env.SECRET_KEY)
+        await User.findOne({
+            _id:decoded._id
+        }).then(user=>{
+            if(user){
+              return res.send({
+                success: true,
+                message: 'validated',
+                data: user
+              });
+            }else{
+              return res.send({
+                success: false,
+                message: 'Error: Algo malio sal'
+              });
+            }
+        }).catch(err=>{
+          return res.send({
+            success: false,
+            message: 'Error: Sv Error'+ err
+          });
+        })
   }
 };
 
