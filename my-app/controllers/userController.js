@@ -57,17 +57,19 @@ const userController = {
         });
        }
        if(UserData){
+         user = UserData;
          if (!UserData.validPassword(req.body.password)){
-      return res.send({
-        success: false,
-        message: 'Error: Pass incorrecta'
-      });
+          return res.send({
+            success: false,
+            message: 'Error: Pass incorrecta'
+          });
     }
     const payload = {
       _id: user._id,
       name: user.name,
       email: user.email
     }
+    console.log(user);
     let token = jwt.sign(payload, process.env.SECRET_KEY, {
       expiresIn: 1440
       })
@@ -89,28 +91,36 @@ const userController = {
   deleteUser: async (req, res) => {},
   updateUser: async (req, res) => {},
   verifyLogin: async (req, res) => {
-    var decoded = jwt.verify(req.headers["authorization"],process.env.SECRET_KEY)
-        await User.findOne({
-            _id:decoded._id
-        }).then(user=>{
-            if(user){
-              return res.send({
-                success: true,
-                message: 'validated',
-                data: user
-              });
-            }else{
-              return res.send({
-                success: false,
-                message: 'Error: Algo malio sal'
-              });
-            }
-        }).catch(err=>{
-          return res.send({
-            success: false,
-            message: 'Error: Sv Error'+ err
-          });
-        })
+    var decoded = jwt.verify(req.headers["authorization"],process.env.SECRET_KEY, function(err, decoded){
+      console.log(err,decoded);
+      if(err){
+        return res.status(404).send(err);
+      }else if(decoded){
+         User.findOne({
+                    _id:decoded._id
+                }).then(user=>{
+                    if(user){
+                      return res.send({
+                        success: true,
+                        message: 'validated',
+                        data: user
+                      });
+                    }else{
+                      return res.status(404).send({
+                        success: false,
+                        message: 'Error: Algo malio sal'
+                      });
+                    }
+                }).catch(err=>{
+                  return res.send({
+                    success: false,
+                    message: 'Error: Sv Error'+ err
+                  });
+                })
+      }
+      
+    })
+        
   }
 };
 

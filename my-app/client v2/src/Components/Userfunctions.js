@@ -60,15 +60,19 @@ export const googlelogin = user => {
     })
 }
 
-export const profile = user => {
+export const profile = token => {
   return axios
-    .get('http://localhost:5000/api/user', {
+    .get('http://localhost:5000/api/user',{
+      headers: {
+        authorization: token 
+      }
     })
     .then(response => {
       console.log(response)
       return response.data
     })
     .catch(err => {
+      localStorage.removeItem('usertoken');
       console.log(err)
     })
 }

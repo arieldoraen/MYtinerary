@@ -12,9 +12,9 @@ class DemoCarousel extends React.Component {
         }
     }
     async componentDidMount(){
-        console.log(this.props.itinerario);
-        const res = await axios.get('http://localhost:5000/api/activity/');
-        this.setState({actividades:res.data.data})
+        // console.log(this.props.itinerario);
+        // const res = await axios.get('http://localhost:5000/api/activity/');
+        // this.setState({actividades:res.data.data})
     }
 
     render() {
@@ -36,12 +36,11 @@ class DemoCarousel extends React.Component {
                                         <img src={itinerario.profilepicture} 
                                         style={{position:"relative", width:"20%"}}
                                         />
-                                        <p>{itinerario.username}</p>
+                                        <p>{itinerario.user_id.name}</p>
                                     </CardText>
                                     <Botonactivity 
-                                    ciudad={itinerario.ciudad}
-                                    titulo={itinerario.title}
-                                    actividades={act} 
+                                    itinerary={itinerario._id}
+                                    //actividades={act} 
                                     />
                                 </Card>
                                 </CardGroup>

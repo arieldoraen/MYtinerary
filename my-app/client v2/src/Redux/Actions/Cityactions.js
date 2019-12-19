@@ -5,7 +5,7 @@ export const getCity=()=>dispatch=>{
     axios.get('http://localhost:5000/api/cities')
         .then(res=>dispatch({
             type:GET_CITY,
-            payload:res.data.data
+            payload:res.data.response
         })
         );
 };

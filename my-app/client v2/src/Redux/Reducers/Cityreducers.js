@@ -9,6 +9,7 @@ const initialState={
 export default function(state=initialState,action){
     switch(action.type){
         case GET_CITY:
+            console.log(action.payload);
             return{
                 ...state,
                 city:action.payload //el payload llega de las actions

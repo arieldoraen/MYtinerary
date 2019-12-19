@@ -12,14 +12,15 @@ class Itinerary extends React.Component {
 		itinerary: PropTypes.object.isRequired,
   };
  componentDidMount() {
-  let ciudad = this.props.match.params.ciudad_id;
-  this.props.getItinerary(ciudad)
+   console.log(this.props.match.params);
+  let ciudad_id = this.props.match.params.ciudad;
+  this.props.getItinerary(ciudad_id)
   };
 
 
   render() {
     const { itinerary } = this.props.itinerary;
-    console.log(itinerary);
+    console.log(itinerary+"itine");
     return (
       <div>
         {itinerary.length >0 ?

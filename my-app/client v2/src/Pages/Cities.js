@@ -27,7 +27,7 @@ class City extends React.Component{
         console.log(this.props.city);
         const {city}=this.props.city;
         let filteredCity=city.filter(
-            (city)=>{return city.ciudad.toLowerCase().indexOf(this.state.search)===0}
+            (city)=>{return city.name.toLowerCase().indexOf(this.state.search)===0}
         )
         return(
             <div className="container">
@@ -42,7 +42,7 @@ class City extends React.Component{
              <div className="divlistaciudades">
              <ul className="ulciudades">
 				{filteredCity.map(ciudad => {
-					let rutaciudad = '/Cities/' + ciudad.ciudad;
+					let rutaciudad = '/Cities/' + ciudad._id;
 					return (
 						<Link to={rutaciudad} key={ciudad._id}>
 						<div className="divciudades">
@@ -50,7 +50,7 @@ class City extends React.Component{
 						<button
 						className="botonciudades"
 						style={{backgroundImage: `url(${ciudad.img})`, backgroundPosition:"center"}}>
-						<p className="textoboton">-{ciudad.ciudad}--{ciudad.pais}-</p>
+						<p className="textoboton">-{ciudad.name}--{ciudad.country}-</p>
 						</button>
 						</li>
 						</div>

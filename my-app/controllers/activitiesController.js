@@ -9,18 +9,21 @@ const activitycontroller = {
     },
     loadActivity: async (req, res) => {
 
-		var name = req.body.name;
-        var image = req.body.image;
-        var itinerary_id = req.params.itinerary_id;
+		  var name = req.body.name;
+      var image = req.body.image || "";
+      var itinerary_id = req.params.itinerary_id;
 
-        const newActivity = new Activity({
+      const newActivity = new Activity({
         name: name,
         image: image,
         itinerary_id: itinerary_id
-        });
+      });
 
-        await newActivity.save().catch(err => res.json({ response: err }));
-        res.json({ response: "OK" });
+      await newActivity.save().catch(err => res.json(
+        { 
+          response: err 
+        }));
+      res.json({ response: "OK" });
 	},
 	deleteActivity: async (req, res) => {
 		var id = req.params.id;

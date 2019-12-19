@@ -2,9 +2,11 @@ const Mytinerary = require("../models/mytineraryModel");
 
 const mytineraryController = {
   listMYtinerarys: async (req, res) => {
-    const data = await Mytinerary.find({
+    var data = await Mytinerary.find({
       city_id : req.params.city_id
-    }).catch(err => res.json({ response: err }));
+    }).populate("user_id").populate("city_id").catch(err => res.json({ response: err }));
+    
+    console.log(data);
     res.json({ response: data });
   },
   loadMYtinerary: async (req, res) => {

@@ -1,57 +1,33 @@
 import React, { useState } from 'react';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import axios from 'axios'
 
-const Example = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
-    const ciudad = props.ciudad
-    console.log(props)
-    const actividades = props.actividades
-    const ciudadfilt = actividades.filter(x => x.ciudad === ciudad);
-    const cantacti = ciudadfilt.length;
-    const titulo= props.titulo;
-    const actfilt= actividades.filter(x => x.title === titulo);
+class Activities extends React.Component {
+    state ={
+        listActivities: []
+    }
 
-    if (cantacti == 0) { return <h3>no hay nada</h3> } //meter un loading y qeu despues muestre lo que hay
-    else {
-        return (
-            <div>
-                 <Button
-                        color="primary"
-                        onClick={toggle}
-                        style={{ marginBottom: '1rem' }}>
-                        {props.titulo}
-                  </Button>
-                        {actfilt.map(partofact => {
-                        if(partofact.title===titulo){
-                        return (
-                        <div>
-                            <Collapse isOpen={isOpen}>
-                                <Card>
-                                <CardBody>
-                                    <div style={{width:"20%", height:"100%", position:"relative",alignItems:"center"}}>
-                                    <img src={partofact.img} style={{width:"100%", height:"100%",position:"relative",textAlign:"center"}}/>
-                                    </div>
-                                </CardBody>
-                                </Card>
-                            </Collapse>
-                        </div>
-                    )}else{
-                        return(
-                        <div>
-                        <Collapse isOpen={isOpen}>
-                        <Card>
-                        <CardBody>
-                          No hay actividades aun
-                        </CardBody>
-                        </Card>
-                    </Collapse>
-                    </div>
-                        )
-                    };
-                })}
-        </div >
-        )}
-	}
+    async componentDidMount() {
+        await axios.get('http://localhost:5000/api/activity/'+this.props.itinerary)
+            .then(res => this.setState({listActivities:res.data.response}));
+        console.log(this.state.listActivities+"asd");
+    }
     
-export default Example;
+    render() {
+        return (
+            <div className="content" >
+                <div className="row" >
+                    <div className="col-md-4" > actividades </div>
+                    <div className="col-md-8" >
+                        <ul > {
+                            this.state.listActivities.map(activity => (
+                                <li key={activity._id}>{activity.name}</li>
+                            ))
+                        } </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}  
+export default Activities;
