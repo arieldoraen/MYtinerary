@@ -9,9 +9,8 @@ router.route('/login')
   .post(userController.login)
 router.route('/register')
   .post(userController.register)
-router.route('/user/:token')
+router.route('/user')
   .get(userController.verifyLogin)
-  .delete(userController.delete)
-  .patch(userController.updateUser)
+  
 
   module.exports=router;

@@ -1,5 +1,6 @@
 const User = require("../models/usersModel");
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
 process.env.SECRET_KEY ='secret';
 
 const userController = {
@@ -28,7 +29,7 @@ const userController = {
     const newUser = new User({
       name: name,
       email: email,
-      password: newUser.generateHash(password),
+      password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null),
       profile_picture: profile_picture
     });
     newUser.save((err, user) => {
@@ -45,6 +46,7 @@ const userController = {
     });
   },
   login: async (req, res) => {
+    var user = "";
     User.findOne({
       email: req.body.email
     }, (err, UserData) => {
@@ -53,15 +55,9 @@ const userController = {
           success: false,
           message: 'Error: Sv Error'+ err
         });
-      } else if(UserData.length != 1) {
-        return res.send({
-          success: false,
-          message: 'Error: Algo malio sal'
-        });  
-      }
-    })
-    const user = UserData[0];
-    if (user.validPassword(req.body.password)){
+       }
+       if(UserData){
+         if (!UserData.validPassword(req.body.password)){
       return res.send({
         success: false,
         message: 'Error: Pass incorrecta'
@@ -80,6 +76,15 @@ const userController = {
         message: 'Logeado',
         token: token
       });
+    } else{
+      return res.send({
+        success: false,
+        message: 'Email incorrecto'
+      });
+    }
+    
+    })
+    
   },
   deleteUser: async (req, res) => {},
   updateUser: async (req, res) => {},

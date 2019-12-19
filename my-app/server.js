@@ -11,6 +11,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", require("./routes/routerCities"));
+app.use("/api", require("./routes/routerActivities"));
+app.use("/api", require("./routes/routerItinerarys"));
+app.use("/api", require("./routes/routerUser"));
 app.get("/test", (req, res) => {
   res.send({ express: "Hello " });
 });

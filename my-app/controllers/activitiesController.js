@@ -1,10 +1,10 @@
-const Activity = require('../models/activityModels');
+const Activity = require('../models/activitiesModel');
 
 const activitycontroller = {
 	listActivities: async (req, res) => {
-		const data = await Activity.find(
-            ("itinerary_id" = req.params.itinerary_id)
-          ).catch(err => res.json({ response: err }));
+		const data = await Activity.find({
+        itinerary_id : req.params.itinerary_id
+      }).catch(err => res.json({ response: err }));
           res.json({ response: data });
     },
     loadActivity: async (req, res) => {

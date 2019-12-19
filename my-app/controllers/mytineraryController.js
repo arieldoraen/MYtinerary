@@ -2,9 +2,9 @@ const Mytinerary = require("../models/mytineraryModel");
 
 const mytineraryController = {
   listMYtinerarys: async (req, res) => {
-    const data = await Mytinerary.find(
-      ("city_id" = req.params.city_id)
-    ).catch(err => res.json({ response: err }));
+    const data = await Mytinerary.find({
+      city_id : req.params.city_id
+    }).catch(err => res.json({ response: err }));
     res.json({ response: data });
   },
   loadMYtinerary: async (req, res) => {
