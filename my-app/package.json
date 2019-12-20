@@ -4,7 +4,7 @@
     "description": "prueba-node",
     "main": "index.js",
     "scripts": {
-        "client": "cd client v2 && npm start",
+        "client": "cd clientv2 && npm start",
         "server": "nodemon server.js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
     },

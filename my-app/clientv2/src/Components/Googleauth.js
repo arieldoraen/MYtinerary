@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import GoogleLogin from "react-google-login";
 import jwt_decode from 'jwt-decode'
-import { register } from "../Components/Userfunctions";
-import { googlelogin } from "../Components/Userfunctions";
+import { register } from "./Userfunctions";
+import { googlelogin } from "./Userfunctions";
 
 class GoogleAuth extends Component {
     render() {
